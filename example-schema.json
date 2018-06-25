@@ -13,7 +13,11 @@
             "description": "Age in years",
             "type": "integer",
             "minimum": 0
-        }
+        },
+        "gender": {
+            "description": "Gender in M or F",
+            "type": ["string", "null"]
+        } 
     },
     "required": [
         "firstName",

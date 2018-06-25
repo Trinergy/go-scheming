@@ -8,17 +8,20 @@ import (
 	"github.com/Trinergy/gologger"
 )
 
-// Schema represents a queryable object that respresents a JSON schema file
-type Schema struct {
-	ID          string `json:"id,omitempty"`
-	Title       string `json:"title,omitempty"`
-	Description string `json:"description,omitempty"`
-}
-
 var (
 	log    = gologger.SetupLogFile("debug_log.txt")
 	logger = gologger.SetupLogger(log)
 )
+
+// Schema represents a queryable object that respresents a JSON schema file
+type Schema struct {
+	ID          string             `json:"id,omitempty"`
+	Description string             `json:"description,omitempty"`
+	Properties  map[string]*Schema `json:"properties,omitempty"`
+	Required    []string           `json:"required,omitempty"`
+	Title       string             `json:"title,omitempty"`
+	Type        string             `json:"type,omitempty"`
+}
 
 // ParseJSONToSchema takes a filename and converts it to a queryable Schema struct
 func ParseJSONToSchema(name string) *Schema {
@@ -47,4 +50,7 @@ func decodeJSON(f io.Reader) *Schema {
 func main() {
 	s := ParseJSONToSchema("example-schema.json")
 	logger.Printf("%s", s.Title)
+	logger.Printf("%s", s.Description)
+	logger.Printf("%v", s.Required)
+	logger.Printf("%v", s.Properties)
 }
