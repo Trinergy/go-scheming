@@ -20,7 +20,7 @@ type Schema struct {
 	Properties  map[string]*Schema `json:"properties,omitempty"`
 	Required    []string           `json:"required,omitempty"`
 	Title       string             `json:"title,omitempty"`
-	Type        string             `json:"type,omitempty"`
+	Type        json.RawMessage    `json:"type,omitempty"`
 }
 
 // ParseJSONToSchema takes a filename and converts it to a queryable Schema struct
@@ -53,4 +53,5 @@ func main() {
 	logger.Printf("%s", s.Description)
 	logger.Printf("%v", s.Required)
 	logger.Printf("%v", s.Properties)
+	logger.Printf("%v", s.Type)
 }
